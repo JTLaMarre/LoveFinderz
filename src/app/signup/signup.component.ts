@@ -31,10 +31,17 @@ export class SignupComponent implements OnInit {
       this.lover = data;
       if(this.lover===null){
         console.log('good to signup')
+        this.PostLover();
       }
       else{
         console.log('user exists')
       }
+    })
+  }
+
+  PostLover(){
+    this.loveServe.PostLover(this.UserName,this.Password).subscribe(data=>{
+      console.log(data);
     })
   }
 
