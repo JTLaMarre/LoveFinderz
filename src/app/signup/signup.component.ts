@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Lover } from '../Models/Lover';
+import { LoverService } from '../services/lover.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,8 +10,9 @@ export class SignupComponent implements OnInit {
 
   UserName:string='';
   Password:string;
+  lover:any;
 
-  constructor() { }
+  constructor(private loveServe:LoverService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +20,22 @@ export class SignupComponent implements OnInit {
   SignUp(){
 
     console.log(this.UserName);
-    console.log(this.Password);
+
+    this.CheckForLover();
+
+  }
+
+  CheckForLover(){
+    this.loveServe.GetLover(this.UserName).subscribe(data=>{
+      console.log(data);
+      this.lover = data;
+      if(this.lover===null){
+        console.log('good to signup')
+      }
+      else{
+        console.log('user exists')
+      }
+    })
   }
 
 }
