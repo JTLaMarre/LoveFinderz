@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoverService } from '../services/lover.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class SignupComponent implements OnInit {
   Password:string;
   lover:any;
 
-  constructor(private loveServe:LoverService) { }
+  constructor(private loveServe:LoverService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -32,9 +33,13 @@ export class SignupComponent implements OnInit {
       if(this.lover===null){
         console.log('good to signup')
         this.PostLover();
+        localStorage.setItem('user',this.UserName);
+
+        this.router.navigateByUrl('/login');
       }
       else{
         console.log('user exists')
+        alert('User Name exists please choose a new user name');
       }
     })
   }

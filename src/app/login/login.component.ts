@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoverService } from '../services/lover.service';
 
 
 @Component({
@@ -10,16 +12,40 @@ export class LoginComponent implements OnInit {
 
   UserName:string='UserName Here';
   password:string;
+  User:string;
 
-  constructor() { }
+
+
+
+  constructor(private router:Router, private service:LoverService) { }
 
   ngOnInit(): void {
+  this.User=localStorage.getItem('user');
+
+  console.log(this.User)
+
+  if(this.User!=null){
+    this.router.navigateByUrl('/profile');
+  }
+
   }
 
   login(){
+    this.service.GetLover(this.UserName).subscribe(data=>{
+      if(this.password==data.password)
+      {
+        localStorage.setItem('user',this.UserName);
+        this.router.navigateByUrl('/profile');
+      }
+    });
+    if(localStorage.getItem('user')!=null){
 
+
+    }
     console.log(this.UserName+'user');
     console.log(this.password+'password');
+
+
 
   }
 
