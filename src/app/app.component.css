@@ -4,4 +4,11 @@ h1{
 }
 .logout{
   float: right;
+  background-color: rgb(133, 78, 78);
+  color: black;
+}
+.wrapper{
+  background-color: rgb(55, 55, 97);
+  color: black;
+  height: 100vh;
 }

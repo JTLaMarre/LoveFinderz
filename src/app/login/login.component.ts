@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user',this.UserName);
         this.router.navigateByUrl('/profile');
       }
+      else{
+        alert('name or password does not match our records');
+      }
+
     });
     if(localStorage.getItem('user')!=null){
 

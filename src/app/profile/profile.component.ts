@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoverService } from '../services/lover.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
   Lover:string;
   LastLoved:Date;
   Lovers:Array<any>;
-  constructor(private service:LoverService) { }
+  constructor(private service:LoverService,private router:Router) { }
 
   ngOnInit(): void {
     this.UserName=localStorage.getItem('user');
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
       if(rando.userName!=this.UserName){
         alert('NEW MATCH');
         this.Lover=rando.userName;
+        localStorage.setItem('lover',this.Lover);
         this.SetLover(rando.userName);
       }
       else{
@@ -49,8 +51,9 @@ export class ProfileComponent implements OnInit {
     })
   }
   ViewMatch(){
-    localStorage.setItem('lover',this.Lover);
-    console.log(this.Lover);
+
+    this.router.navigateByUrl('/lover');
+
   }
 
 }
