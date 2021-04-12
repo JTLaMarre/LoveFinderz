@@ -15,10 +15,16 @@ export class LoverService {
   GetLover(User:string){
     return this.http.get<any>(`${this.baseUrl}Lovers/${User}`)
   }
+  GetLovers(){
+    return this.http.get<any>(`${this.baseUrl}Lovers`)
+  }
   PostLover(User:string,Password:string){
     return this.http.post<any>(`${this.baseUrl}Lover/${User}/${Password}`,{UserName:User,Password:Password});
   }
   upDateSexBio(User:string,Sex:string,Bio:string){
     return this.http.put<any>(`${this.baseUrl}Lovers/${User}/${Sex}/${Bio}`,null)
+  }
+  updateLover(User:string,Lover:string){
+    return this.http.put<any>(`${this.baseUrl}Lovers/${User}/${Lover}`,null)
   }
 }

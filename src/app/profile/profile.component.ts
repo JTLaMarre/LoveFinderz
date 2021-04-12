@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   Bio:string;
   Lover:string;
   LastLoved:Date;
-
+  Lovers:Array<any>;
   constructor(private service:LoverService) { }
 
   ngOnInit(): void {
@@ -20,14 +20,37 @@ export class ProfileComponent implements OnInit {
     this.service.GetLover(localStorage.getItem('user')).subscribe(data=>{
       this.Bio=data.bio;
       this.Sex=data.sex;
+      this.Lover=data.lovername;
     })
-  }
+    this.service.GetLovers().subscribe(data=>{
+      this.Lovers=data;
+      console.log(this.Lovers);
+      let rando = this.Lovers[Math.floor(Math.random() * this.Lovers.length)];
+      console.log(rando);
+      if(rando.userName!=this.UserName){
+        alert('NEW MATCH');
+        this.Lover=rando.userName;
+        this.SetLover(rando.userName);
+      }
+      else{
+        alert('No new matches');
 
+      }
+    })
+
+  }
+  SetLover(lovername:string){
+    this.service.updateLover(this.UserName,lovername).subscribe(data=>console.log(data));
+  }
   SaveSexBio(){
     console.log(this.Bio);
     this.service.upDateSexBio(this.UserName,this.Sex,this.Bio).subscribe(data=>{
       console.log(data);
     })
+  }
+  ViewMatch(){
+    localStorage.setItem('lover',this.Lover);
+    console.log(this.Lover);
   }
 
 }
