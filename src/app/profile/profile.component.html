@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<h2 class="is-size-2"> {{ UserName }}  </h2>
+<br>
+<p>{{ Sex }}</p>
+<br>
+<p> {{ Bio }} </p>
+<br>
+<label >Set Sex</label>
+<br>
+<input type="text" ngModel maxlength="10" [(ngModel)]="Sex">
+<br>
+<label >Set Bio</label>
+<br>
+<textarea class="textarea" rows="10"  ngModel maxlength="100" [(ngModel)]="Bio"></textarea>
+<br>
+<button class="button is-info" (click)="SaveSexBio()">Save Changes</button>
+
+
+
+
+
