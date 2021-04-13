@@ -29,10 +29,10 @@ export class ProfileComponent implements OnInit {
       let rando = this.Lovers[Math.floor(Math.random() * this.Lovers.length)];
       console.log(rando);
       if(rando.userName!=this.UserName){
-        alert('NEW MATCH');
         this.Lover=rando.userName;
         localStorage.setItem('lover',this.Lover);
         this.SetLover(rando.userName);
+        alert('NEW MATCH');
       }
       else{
         alert('No new matches');
@@ -45,10 +45,16 @@ export class ProfileComponent implements OnInit {
     this.service.updateLover(this.UserName,lovername).subscribe(data=>console.log(data));
   }
   SaveSexBio(){
-    console.log(this.Bio);
-    this.service.upDateSexBio(this.UserName,this.Sex,this.Bio).subscribe(data=>{
-      console.log(data);
-    })
+    if(this.Sex=='yes please'||this.Sex=='Yes please'){
+      alert('bonk! you know it means gender')
+    }
+    else{
+
+      console.log(this.Bio);
+      this.service.upDateSexBio(this.UserName,this.Sex,this.Bio).subscribe(data=>{
+        console.log(data);
+      })
+    }
   }
   ViewMatch(){
 
