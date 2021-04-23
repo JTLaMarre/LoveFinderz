@@ -8,7 +8,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class LoverService {
 
-  baseUrl:string='https://localhost:5001/';
+  baseUrl:string='https://lovefinderzapi.azurewebsites.net/';
 
   constructor(private http:HttpClient) { }
 
